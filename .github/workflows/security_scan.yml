@@ -22,7 +22,8 @@ jobs:
       - name: Install ZAP
         run: |
           sudo apt-get update
-          sudo apt-get install zaproxy --classic
+          sudo apt list --upgradable
+          sudo apt-get install zaproxy
 
       - name: Run ZAP Security Scan
         run: |
