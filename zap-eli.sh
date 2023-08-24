@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set your target URL
-TARGET_URL="https://your-website.com"
+TARGET_URL="http://brainportstg.wpengine.com/"
 
 # Start ZAP in daemon mode
 zap.sh -daemon -port 8080
