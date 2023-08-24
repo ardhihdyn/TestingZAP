@@ -1,4 +1,4 @@
-name: Security Scan
+name: ZAP Security Scan
 
 on:
   push:
@@ -23,13 +23,24 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y zaproxy
 
-      - name: Run ZAP Security Test
+      - name: Run ZAP Security Scan
         run: |
-          chmod +x ./zap_test.sh
-          ./zap_test.sh
+          # Start ZAP in daemon mode
+          zap.sh -daemon -port 8080
 
-      - name: Upload Report
+          # Wait for ZAP to start
+          sleep 10
+
+          # Execute ZAP script
+          node zap-scripts/zap_script.js
+
+          # Wait for ZAP to finish (e.g., based on script execution)
+
+          # Stop ZAP
+          zap-cli -p 8080 shutdown
+
+      - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
         with:
           name: zap-report
-          path: /path/to/report.html
+          path: /path/to/zap-report.html
