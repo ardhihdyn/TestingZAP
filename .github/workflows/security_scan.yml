@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -21,8 +21,8 @@ jobs:
 
       - name: Install ZAP
         run: |
-          sudo apt-get update
-          sudo apt-get install owasp-zap
+          sudo apt update
+          sudo apt install owasp-zap
 
       - name: Run ZAP Security Scan
         run: |
