@@ -13,7 +13,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.9.0
         with:
-          target: 'https://www.zaproxy.org'
+          target: 'http://brainportstg.wpengine.com/'
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
