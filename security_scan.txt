@@ -1,22 +1,36 @@
-name: ZAP Security Scan
+name: Security Scan with ZAP
 
 on:
   push:
     branches:
       - main
-      
+
 jobs:
-  zap_scan:
+  security_scan:
     runs-on: ubuntu-latest
-    name: Scan the webapplication
+
     steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.9.0
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Java
+        uses:  actions/setup-java@v3
         with:
-          target: 'http://brainportstg.wpengine.com/'
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install ZAP
+        run: |
+          sudo apt-get update
+          sudo snap install zaproxy --classic
+
+      - name: Run ZAP Security Scan
+        run: |
+          chmod +x ./zap-test.sh
+          ./zap-test.sh
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
         with:
           name: zap-report
-          path: /path/to/zap-report.html
+          path: /path/to/report.html

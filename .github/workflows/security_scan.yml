@@ -1,4 +1,4 @@
-name: Security Scan with ZAP
+name: ZAP Security Scan
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Java
+      - name: Set up Java
         uses:  actions/setup-java@v3
         with:
           java-version: '17'
@@ -26,11 +26,22 @@ jobs:
 
       - name: Run ZAP Security Scan
         run: |
-          chmod +x ./zap-test.sh
-          ./zap-test.sh
+          # Start ZAP in daemon mode
+          zap.sh -daemon -port 8080
+
+          # Wait for ZAP to start
+          sleep 10
+
+          # Execute ZAP script
+          node zap-scripts/zap_script.js
+
+          # Wait for ZAP to finish (e.g., based on script execution)
+
+          # Stop ZAP
+          zap-cli -p 8080 shutdown
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
         with:
           name: zap-report
-          path: /path/to/report.html
+          path: /path/to/zap-report.html
