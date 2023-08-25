@@ -21,8 +21,8 @@ jobs:
 
       - name: Install ZAP
         run: |
-          cd /snap/bin
-          ls
+          sudo snap install zaproxy --classic
+          snap info zaproxy
 
       - name: Run ZAP Security Scan
         run: |
