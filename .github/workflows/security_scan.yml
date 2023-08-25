@@ -22,8 +22,7 @@ jobs:
       - name: Install ZAP
         run: |
           sudo apt-get update
-          sudo apt-get install snapd
-          snap install zaproxy --classic
+          sudo snap install zaproxy --classic
 
       - name: Run ZAP Security Scan
         run: |
