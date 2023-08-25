@@ -4,7 +4,7 @@
 TARGET_URL="http://brainportstg.wpengine.com/"
 
 # Start ZAP in daemon mode
-/snap/bin/zaproxy/zap.sh -daemon -port 8080
+/snap/bin/zaproxy -daemon -port 8080
 
 # Perform a spider scan
 zap-cli --zap-url http://localhost:8080 -p 8080 spider $TARGET_URL
