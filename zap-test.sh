@@ -1,23 +1,28 @@
 #!/bin/bash
 
-# Set your target URL
-TARGET_URL="http://brainportstg.wpengine.com/"
+# Configuration
+ZAP_PATH="/usr/bin/git/zap.sh"  # Replace with the actual path to zap.sh
+TARGET_URL="http://brainportstg.wpengine.com/"  # Replace with your target URL
+REPORT_PATH="report.html"  # Specify the path for the report
 
 # Start ZAP in daemon mode
-#/snap/bin/zaproxy -daemon -port 8080
-/Applications/OWASP\ ZAP.app/Contents/Java/zap.sh -daemon -port 8080
+$ZAP_PATH -daemon -port 8080 -host 0.0.0.0
 
-# Perform a spider scan
-zap-cli --zap-url http://localhost:8080 -p 8080 spider $TARGET_URL
+# Spider the target URL
+$ZAP_PATH -cmd -quickurl $TARGET_URL
 
-# Wait for the spider to finish (you may need to adjust this duration)
+# Wait for the spider to finish (adjust sleep duration as needed)
 sleep 30
 
-# Perform an active scan
-zap-cli --zap-url http://localhost:8080 -p 8080 active-scan $TARGET_URL
+# Passive scan (optional, uncomment if needed)
+# $ZAP_PATH -cmd -quickscan $TARGET_URL
 
-# Generate a report (HTML or other formats)
-zap-cli --zap-url http://localhost:8080 -p 8080 report -o /path/to/report.html -f html
+# Active scan
+$ZAP_PATH -cmd -quickspider $TARGET_URL
+$ZAP_PATH -cmd -quickscan $TARGET_URL
 
-# Shut down ZAP
-zap-cli --zap-url http://localhost:8080 -p 8080 shutdown
+# Generate an HTML report
+$ZAP_PATH -cmd -report $REPORT_PATH -source $TARGET_URL
+
+# Shutdown ZAP
+$ZAP_PATH -cmd -shutdown
