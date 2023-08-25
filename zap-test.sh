@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-ZAP_PATH="/usr/bin/git/zap.sh"  # Replace with the actual path to zap.sh
+ZAP_PATH="/usr/bin/zap.sh"  # Replace with the actual path to zap.sh
 TARGET_URL="http://brainportstg.wpengine.com/"  # Replace with your target URL
 REPORT_PATH="report.html"  # Specify the path for the report
 
