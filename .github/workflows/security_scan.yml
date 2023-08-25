@@ -26,7 +26,7 @@ jobs:
 
       - name: Run ZAP Security Scan
         run: |
-          chmod +x zap_test.sh
+          chmod +x zap_eli.sh
           ./zap_eli.sh
 
       - name: Upload ZAP Report
