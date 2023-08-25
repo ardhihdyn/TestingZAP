@@ -1,0 +1,22 @@
+name: ZAP Security Scan
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the webapplication
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: 'http://brainportstg.wpengine.com/'
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: /path/to/zap-report.html
