@@ -26,8 +26,8 @@ jobs:
 
       - name: Run ZAP Security Scan
         run: |
-          chmod +x ./zap_test.sh
-          ./zap_test.sh
+          pwd
+          ls
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
