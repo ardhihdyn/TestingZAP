@@ -6,7 +6,7 @@ TARGET_URL="http://brainportstg.wpengine.com/"  # Replace with your target URL
 REPORT_PATH="report.html"  # Specify the path for the report
 
 # Start ZAP in daemon mode
-$ZAP_PATH -daemon -newsession session -port 8080 -host 127.0.0.1
+# $ZAP_PATH -daemon -newsession session -port 8080 -host 127.0.0.1
 
 # Spider the target URL
 $ZAP_PATH -cmd -quickurl $TARGET_URL
