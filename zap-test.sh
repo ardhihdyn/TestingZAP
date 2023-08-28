@@ -12,7 +12,7 @@ REPORT_PATH="report.html"  # Specify the path for the report
 $ZAP_PATH -cmd -quickurl $TARGET_URL
 
 # Wait for the spider to finish (adjust sleep duration as needed)
-sleep 30
+# sleep 30
 
 # Passive scan (optional, uncomment if needed)
 # $ZAP_PATH -cmd -quickscan $TARGET_URL
