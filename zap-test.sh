@@ -42,7 +42,7 @@ file_name="$timestamp"
 $ZAP_PATH -export_report "$HOME"/"$file_name".xhtml -source_info "$report_title;$prepared_by;$prepared_for;$scan_date;$report_date;$scan_version;$report_version;$report_description" -alert_severity "t;t;f;t" -alert_details "t;t;t;t;t;t;f;f;f;f" -session "$timestamp.session" -cm
 
 # Send Report into Slack
-# curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"ZAP Scan Report for $TARGET_URL\",\"attachments\":[{\"title\":\"Report\",\"text\":\"<!here>\",\"color\":\"good\"} ]}" $SLACK_WEBHOOK_URL
+curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"ZAP Scan Report for $TARGET_URL\",\"attachments\":[{\"title\":\"Report\",\"text\":\"<!here>\",\"color\":\"good\"} ]}" $SLACK_WEBHOOK_URL
 
 # Shutdown ZAP
 # $ZAP_PATH -cmd -shutdown
