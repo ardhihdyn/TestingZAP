@@ -4,7 +4,6 @@
 ZAP_PATH="/snap/bin/zaproxy"  # Replace with the actual path to zap.sh
 TARGET_URL="http://brainportstg.wpengine.com/"  # Replace with your target URL
 REPORT_PATH="report.html"  # Specify the path for the report
-SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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" # Slack Channel URL
 timestamp=$(date '+%s');
 
 # Start ZAP in daemon mode
@@ -39,10 +38,7 @@ file_name="$timestamp"
 # $ZAP_PATH -cmd -report $REPORT_PATH -source $TARGET_URL
 
 # Getting the report generated in XHTML format
-$ZAP_PATH -export_report "$HOME"/"$file_name".xhtml -source_info "$report_title;$prepared_by;$prepared_for;$scan_date;$report_date;$scan_version;$report_version;$report_description" -alert_severity "t;t;f;t" -alert_details "t;t;t;t;t;t;f;f;f;f" -session "$timestamp.session" -cm
-
-# Send Report into Slack
-curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"ZAP Scan Report for $TARGET_URL\",\"attachments\":[{\"title\":\"Report\",\"text\":\"<!here>\",\"color\":\"good\"} ]}" $SLACK_WEBHOOK_URL
+$ZAP_PATH -export_report zap-report.xhtml -source_info "$report_title;$prepared_by;$prepared_for;$scan_date;$report_date;$scan_version;$report_version;$report_description" -alert_severity "t;t;f;t" -alert_details "t;t;t;t;t;t;f;f;f;f" -session "$timestamp.session" -cmd
 
 # Shutdown ZAP
 # $ZAP_PATH -cmd -shutdown
